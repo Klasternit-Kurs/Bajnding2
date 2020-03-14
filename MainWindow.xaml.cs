@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +21,16 @@ namespace Bajnding2
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		public Osoba o = new Osoba("Pera", "Peric");
+		public ObservableCollection<Osoba> Osobe = 
+			new ObservableCollection<Osoba>();
 		public MainWindow()
 		{
 			InitializeComponent();
-
-			this.DataContext = o;
+			Osobe.Add(new Osoba("Pera", "Peric"));
+			Osobe.Add(new Osoba("Neko", "Nekic"));
+			Osobe.Add(new Osoba("Trecko", "Treckovic"));
+			dg.ItemsSource = Osobe;
+			
 			this.BindingGroup = new BindingGroup();
 
 			/*Binding bIme = new Binding();
@@ -34,6 +39,25 @@ namespace Bajnding2
 			bIme.Mode = BindingMode.OneWay;
 
 			BindingOperations.SetBinding(lIme, Label.ContentProperty, bIme);*/
+		}
+
+		private void Obrisi(object o, RoutedEventArgs a)
+		{
+			if (dg.SelectedItem != null)
+			{
+				Osobe.Remove(dg.SelectedItem as Osoba);
+			}
+		}
+
+		private void Izmena(object zklj, RoutedEventArgs e)
+		{
+			if (dg.SelectedItem != null)
+			{
+				Editor Ed = new Editor();
+				Ed.Owner = this;
+				Ed.DataContext = dg.SelectedItem;
+				Ed.ShowDialog();
+			}
 		}
 
 		private void Unos(object sender, RoutedEventArgs e)
@@ -53,10 +77,18 @@ namespace Bajnding2
 
 			Editor drugiProzor = new Editor();
 			drugiProzor.Owner = this;
-			drugiProzor.DataContext = this.DataContext;
-			drugiProzor.ShowDialog(); //stojimo ovde dokle god se
-									//drugi prozor ne zatvori
-
+			//drugiProzor.ShowDialog(); //stojimo ovde dokle god se
+									  //drugi prozor ne zatvori
+			string asd = null;
+			Osoba a = null;
+			
+			bool asdd = true;
+			bool? dsa = null;
+			
+			if (drugiProzor.ShowDialog() == true)
+			{
+				Osobe.Add(drugiProzor.DataContext as Osoba);
+			}
 		}
 	}
 }

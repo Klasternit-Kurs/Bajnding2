@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:Bajnding2"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-	<StackPanel>
-		
-		<Button Content="Unos" FontSize="42" Click="Unos" />
-		<Label Content="Osoba: " FontSize="42"/>
-		<Label Content="{Binding Ime}" FontSize="42"/>
-		<Label Content="{Binding Prezime}" FontSize="42"/>
-		<Label Content="{Binding Godine}" FontSize="42"/>
-	</StackPanel>
+	<DockPanel>
+		<StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
+			<Button Content="Unos" Margin="0 20" FontSize="42" Click="Unos" />
+			<Button Content="Brisanje" Margin="0 20" FontSize="42" Click="Obrisi"/>
+			<Button Content="Izmena" Margin="0 20" FontSize="42" Click="Izmena"/>
+		</StackPanel>
+		<DataGrid Name="dg" ColumnWidth="*" IsReadOnly="True" SelectionMode="Single" FontSize="42"/>
+	</DockPanel>
 </Window>

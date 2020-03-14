@@ -17,5 +17,7 @@ namespace Bajnding2
 			Ime = i;
 			Prezime = p;
 		}
+
+		public Osoba() { }
 	}
 }

@@ -19,16 +19,19 @@ namespace Bajnding2
 	/// </summary>
 	public partial class Editor : Window
 	{
+
 		public Editor()
 		{
 			InitializeComponent();
 			this.BindingGroup = new BindingGroup();
+			DataContext = new Osoba();
 		}
 
 		private void Unos(object sender, RoutedEventArgs e)
 		{
 			if (this.BindingGroup.CommitEdit())
 			{
+				this.DialogResult = true;
 				this.Close();
 			}
 		}
